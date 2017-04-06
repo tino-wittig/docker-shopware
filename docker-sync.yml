@@ -1,0 +1,24 @@
+version: "2"
+syncs:
+  # IMPORTANT: this name must be unique and should NOT match your real application container name! 
+  fullexample-sync:
+    # enable terminal_notifier. On every sync sends a Terminal Notification regarding files being synced. ( Mac Only ).
+    # good thing in case you are developing and want to know exactly when your changes took effect.
+    # be aware in case of unison this only gives you a notification on the initial sync, not the syncs after changes.
+    notify_terminal: true
+
+    # which folder to watch / sync from - you can use tilde (~), it will get expanded. Be aware that the trailing slash makes a difference
+    # if you add them, only the inner parts of the folder gets synced, otherwise the parent folder will be synced as top-level folder
+    src: '../src'
+
+    # when a port of a container is exposed, on which IP does it get exposed. Localhost for docker for mac, something else for docker-machine
+    sync_host_ip: '127.0.0.1'
+
+    # should be a unique port this sync instance uses on the host to offer the rsync service on
+    sync_host_port: 10871
+
+    # optional, a list of excludes for rsync - see rsync docs for details
+    sync_excludes: ['.idea/','Gemfile.lock', 'Gemfile', 'config.rb', '.sass-cache/', 'sass/', 'sass-cache/', 'composer.json' , 'bower.json', 'package.json', 'Gruntfile*', 'bower_components/', 'node_modules/', '.gitignore', '.git/', '*.coffee', '*.scss', '*.sass']
+
+    watch_excludes: ['.idea/','.*/.git', '.*/node_modules', '.*/bower_components', '.*/sass-cache', '.*/.sass-cache', '.*/.sass-cache', '.coffee', '.scss', '.sass', '.gitignore']
+
